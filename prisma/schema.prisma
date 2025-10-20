@@ -1,0 +1,264 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          String    @default("user") // user, admin
+  status        String    @default("active") // active, suspended
+  coins         Int       @default(0)
+  ram           Int       @default(4) // Total RAM in GB
+  cpu           Int       @default(100) // CPU percentage (100 = 1 core)
+  disk          Int       @default(10) // Total disk in GB
+  serverSlots   Int       @default(1)
+  // Linked Pterodactyl application user id
+  pteroUserId   Int?
+  // Encrypted Pterodactyl panel password
+  pteroPasswordEnc String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts          Account[]
+  sessions          Session[]
+  servers           Server[]
+  coinTransactions  CoinTransaction[]
+  afkSessions       AfkSession[]
+  taskCompletions   TaskCompletion[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  refresh_token_expires_in Int?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  oauth_token_secret String?
+  oauth_token       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now())
+
+  @@unique([identifier, token])
+}
+
+model Location {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  image       String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  nodes Node[]
+}
+
+model Node {
+  id         String   @id @default(cuid())
+  name       String
+  locationId String
+  ip         String
+  ram        Int      // Total RAM in GB
+  cpu        Int      // Total CPU cores
+  disk       Int      // Total disk in GB
+  usedRam    Int      @default(0)
+  usedCpu    Int      @default(0)
+  usedDisk   Int      @default(0)
+  status     String   @default("online") // online, offline, maintenance
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  location Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  servers  Server[]
+}
+
+model Server {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  nodeId      String?
+  type        String   // minecraft, custom
+  version     String
+  software    String   // vanilla, paper, spigot, forge, fabric
+  status      String   @default("offline") // online, offline, starting, stopping, error
+  ram         Int      @default(4) // Allocated RAM in GB
+  cpu         Int      @default(2) // Allocated CPU cores
+  disk        Int      @default(10) // Allocated disk in GB
+  port        Int?
+  maxPlayers  Int      @default(20)
+  currentPlayers Int   @default(0)
+  uptime      Int      @default(0) // In minutes
+  // Pterodactyl linkage
+  pteroId           String?
+  pteroIdentifier   String?
+  pteroExternalId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  node Node? @relation(fields: [nodeId], references: [id])
+}
+
+model CoinTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  amount      Int      // Positive for earning, negative for spending
+  type        String   // purchase, afk, linkvertise, join4reward, upgrade, bonus
+  description String
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AfkSession {
+  id         String   @id @default(cuid())
+  userId     String
+  startTime  DateTime @default(now())
+  endTime    DateTime?
+  duration   Int      @default(0) // In minutes
+  coinsEarned Int     @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model TaskCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  taskType    String   // linkvertise, discord, twitter, youtube
+  reward      Int
+  completedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, taskType])
+}
+
+model ShopItem {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  type        String   // coin_package, ram, cpu, disk, server_slot
+  value       Int      // Amount of resource (GB for ram/disk, percentage for cpu, coins for packages)
+  price       Int      // Price in INR
+  image       String?
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ---------- Pterodactyl admin-managed metadata ----------
+model PteroNest {
+  id         String   @id @default(cuid())
+  pteroId    Int      @unique
+  name       String
+  isEnabled  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  eggs PteroEgg[]
+}
+
+model PteroEgg {
+  id            String    @id @default(cuid())
+  pteroId       Int       @unique
+  nestPteroId   Int
+  name          String
+  dockerImage   String?
+  startup       String?
+  isEnabled     Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  nest PteroNest @relation(fields: [nestPteroId], references: [pteroId])
+}
+
+model PteroNode {
+  id             String   @id @default(cuid())
+  pteroId        Int      @unique
+  name           String
+  locationPteroId Int?
+  isEnabled      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Join4RewardTask {
+  id          String   @id @default(cuid())
+  platform    String   // Discord, Twitter, YouTube, etc.
+  description String
+  reward      Int      // Coins to reward
+  link        String   // URL to the task (discord invite, twitter profile, etc.)
+  actionLabel String   // Button text like "Join Server", "Follow", "Subscribe"
+  icon        String   // Icon identifier
+  color       String   // Gradient color classes
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model LeaderboardEntry {
+  id         String   @id @default(cuid())
+  type       String   // coins, afk, activity
+  userId     String
+  username   String
+  avatar     String?
+  score      Int      // Main score (coins, minutes, activity points)
+  servers    Int      @default(0)
+  uptime     String?  // For activity leaderboard
+  tasks      Int      @default(0)
+  updatedAt  DateTime @updatedAt
+  createdAt  DateTime @default(now())
+
+  @@unique([type, userId])
+  @@index([type, score])
+}

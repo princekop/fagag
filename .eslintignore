@@ -1,0 +1,16 @@
+# Generated files
+src/generated/**
+node_modules
+.next
+
+# Build outputs
+out
+dist
+build
+
+# Config files
+*.config.js
+*.config.mjs
+
+# Prisma generated
+prisma/migrations
