@@ -28,9 +28,6 @@ export default function CreateServerPage() {
   const [selCpu, setSelCpu] = useState<number>(100) // percent
   const [formData, setFormData] = useState({
     name: "",
-    type: "minecraft-java",
-    version: "1.21.5",
-    software: "vanilla",
     description: "",
   })
 
@@ -171,60 +168,8 @@ export default function CreateServerPage() {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="type">Server Type</Label>
-                  <select
-                    id="type"
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                    value={formData.type}
-                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    required
-                  >
-                    <option value="minecraft-java">Minecraft Java Edition</option>
-                    <option value="minecraft-bedrock" disabled>Minecraft Bedrock (Coming Soon)</option>
-                    <option value="custom" disabled>Custom (Coming Soon)</option>
-                  </select>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="version">Minecraft Version</Label>
-                    <select
-                      id="version"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      value={formData.version}
-                      onChange={(e) => setFormData({ ...formData, version: e.target.value })}
-                      required
-                    >
-                      <option value="1.21.5">1.21.5 (Latest)</option>
-                      <option value="1.21.4">1.21.4</option>
-                      <option value="1.21.3">1.21.3</option>
-                      <option value="1.20.4">1.20.4</option>
-                      <option value="1.20.1">1.20.1</option>
-                      <option value="1.19.4">1.19.4</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="software">Server Software</Label>
-                    <select
-                      id="software"
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      value={formData.software}
-                      onChange={(e) => setFormData({ ...formData, software: e.target.value })}
-                      required
-                    >
-                      <option value="vanilla">Vanilla</option>
-                      <option value="paper">Paper</option>
-                      <option value="spigot">Spigot</option>
-                      <option value="forge">Forge</option>
-                      <option value="fabric">Fabric</option>
-                    </select>
-                  </div>
-                </div>
-
                 {(nests.length > 0 || eggs.length > 0 || nodes.length > 0) && (
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-3">
                     <p className="text-sm font-medium">Software (Nest) and Mode (Egg)</p>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <div className="space-y-2">

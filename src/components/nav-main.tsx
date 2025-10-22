@@ -21,15 +21,19 @@ export function NavMain({
   }[]
 }) {
   return (
-    <SidebarGroup>
+    <SidebarGroup className="p-0">
       <SidebarGroupContent>
-        <SidebarMenu>
+        <SidebarMenu className="space-y-0.5">
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title} asChild className="text-white/80 hover:text-white">
-                <Link href={item.url}>
-                  {item.icon && <item.icon />}
-                  <span className="text-white/80 group-hover:text-white">{item.title}</span>
+              <SidebarMenuButton 
+                tooltip={item.title} 
+                asChild 
+                className="text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/80 py-2.5 px-3 text-sm font-medium transition-colors rounded-md"
+              >
+                <Link href={item.url} className="flex items-center gap-3 w-full min-w-0">
+                  {item.icon && <item.icon className="size-[18px] flex-shrink-0 opacity-80" />}
+                  <span className="truncate flex-1">{item.title}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

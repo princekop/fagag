@@ -9,9 +9,9 @@ export function DocsLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="h-screen overflow-hidden bg-black text-white flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/98 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/98 backdrop-blur-xl flex-shrink-0">
         <div className="flex h-14 items-center px-4 lg:px-6">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -49,9 +49,9 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Sidebar - Desktop */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex flex-shrink-0 h-full">
           <DocsSidebar />
         </div>
 
@@ -62,14 +62,14 @@ export function DocsLayout({ children }: { children: ReactNode }) {
               className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
               onClick={() => setSidebarOpen(false)}
             />
-            <div className="fixed left-0 top-16 z-50 h-[calc(100vh-4rem)] lg:hidden">
+            <div className="fixed left-0 top-14 z-50 h-[calc(100vh-3.5rem)] lg:hidden">
               <DocsSidebar />
             </div>
           </>
         )}
 
         {/* Main Content */}
-        <main className="flex-1 w-full overflow-x-hidden">
+        <main className="flex-1 w-full min-w-0 overflow-y-auto overflow-x-hidden">
           {children}
         </main>
       </div>

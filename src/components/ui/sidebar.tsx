@@ -218,8 +218,9 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear",
-          "group-data-[collapsible=offcanvas]:w-0",
+          "relative w-(--sidebar-width) bg-transparent transition-[width] duration-200 ease-linear shrink-0",
+          "group-data-[collapsible=offcanvas]:group-data-[state=collapsed]:w-0",
+          "group-data-[collapsible=offcanvas]:group-data-[state=expanded]:w-(--sidebar-width)",
           "group-data-[side=right]:rotate-180",
           variant === "floating" || variant === "inset"
             ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
@@ -229,10 +230,10 @@ function Sidebar({
       <div
         data-slot="sidebar-container"
         className={cn(
-          "fixed inset-y-0 z-10 hidden h-screen w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex overflow-hidden",
+          "fixed inset-y-0 z-10 hidden h-screen w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex overflow-hidden flex-col",
           side === "left"
-            ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
-            : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
+            ? "left-0 group-data-[collapsible=offcanvas]:group-data-[state=collapsed]:left-[calc(var(--sidebar-width)*-1)] group-data-[collapsible=offcanvas]:group-data-[state=expanded]:left-0"
+            : "right-0 group-data-[collapsible=offcanvas]:group-data-[state=collapsed]:right-[calc(var(--sidebar-width)*-1)] group-data-[collapsible=offcanvas]:group-data-[state=expanded]:right-0",
           // Adjust the padding for floating and inset variants.
           variant === "floating" || variant === "inset"
             ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"

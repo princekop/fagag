@@ -12,20 +12,18 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       defaultOpen={true}
       style={
         {
-          "--sidebar-width": "280px",
-          "--sidebar-width-mobile": "280px",
+          "--sidebar-width": "16rem",
+          "--sidebar-width-mobile": "20rem",
           "--header-height": "60px",
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant="inset" collapsible="offcanvas" />
-      <SidebarInset className="overflow-hidden">
+      <AppSidebar />
+      <SidebarInset className="flex flex-col h-screen overflow-hidden">
         <SiteHeader />
-        <div className="flex flex-1 flex-col overflow-auto bg-smoky-dark">
-          <div className="@container/main flex flex-1 flex-col">
-            <div className="flex flex-col gap-4 py-4 sm:gap-6 sm:py-6 md:gap-8 md:py-8">
-              {children}
-            </div>
+        <div className="flex-1 overflow-y-auto overflow-x-hidden bg-smoky-dark">
+          <div className="w-full">
+            {children}
           </div>
         </div>
       </SidebarInset>

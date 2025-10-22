@@ -218,10 +218,15 @@ export async function POST(request: Request) {
 
     const body = await request.json()
     const { name, type, version, software, pteroEggId, pteroNodeLocationId, ram, disk, cpu, description } = body as {
-      name: string; type: string; version: string; software: string;
+      name: string; type?: string; version?: string; software?: string;
       pteroEggId?: number; pteroNodeLocationId?: number;
       ram?: number; disk?: number; cpu?: number; description?: string;
     }
+    
+    // Set defaults if not provided (for compatibility with Pterodactyl-only creation)
+    const serverType = type || "minecraft-java"
+    const serverVersion = version || "latest"
+    const serverSoftware = software || "vanilla"
 
     // Determine desired resources for this server based on user's specs and posted values
     const maxRam = Math.max(1, Number(user.ram ?? 4))
@@ -243,9 +248,9 @@ export async function POST(request: Request) {
     const server = await prisma.server.create({
       data: {
         name,
-        type,
-        version,
-        software,
+        type: serverType,
+        version: serverVersion,
+        software: serverSoftware,
         userId: user.id,
         nodeId: availableNode?.id ?? null,
         ram: desiredRam,

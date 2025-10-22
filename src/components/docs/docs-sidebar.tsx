@@ -313,7 +313,7 @@ export function DocsSidebar() {
 
   return (
     <motion.aside
-      className="sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto border-r border-white/5 bg-gradient-to-b from-black via-black/95 to-black backdrop-blur-xl scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent"
+      className="h-full overflow-y-auto border-r border-white/5 bg-gradient-to-b from-black via-black/95 to-black backdrop-blur-xl scrollbar-thin scrollbar-thumb-primary/10 scrollbar-track-transparent"
       animate={{ width: isCollapsed ? 80 : 300 }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >

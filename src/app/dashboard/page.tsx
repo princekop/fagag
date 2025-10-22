@@ -106,10 +106,10 @@ export default function Page() {
           </span>
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card className="card-smoky card-hover border-primary/30 bg-smoky-gradient">
+          <Card className="card-smoky border-primary/30 bg-smoky-gradient">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-4">
-                <div className="flex size-14 items-center justify-center rounded-xl bg-primary/20 ring-2 ring-primary/30 glow-primary">
+                <div className="flex size-14 items-center justify-center rounded-xl bg-primary/20 border-2 border-primary/30">
                   <IconPlus className="size-7 text-primary" />
                 </div>
                 <div>
@@ -128,10 +128,10 @@ export default function Page() {
             </CardContent>
           </Card>
 
-          <Card className="card-smoky card-hover border-accent/30 bg-purple-smoky">
+          <Card className="card-smoky border-accent/30 bg-purple-smoky">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-4">
-                <div className="flex size-14 items-center justify-center rounded-xl bg-accent/20 ring-2 ring-accent/30 glow-accent">
+                <div className="flex size-14 items-center justify-center rounded-xl bg-accent/20 border-2 border-accent/30">
                   <IconRocket className="size-7 text-accent" />
                 </div>
                 <div>
@@ -150,10 +150,10 @@ export default function Page() {
             </CardContent>
           </Card>
 
-          <Card className="card-smoky card-hover border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
+          <Card className="card-smoky border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-transparent">
             <CardHeader className="pb-4">
               <div className="flex items-center gap-4">
-                <div className="flex size-14 items-center justify-center rounded-xl bg-amber-500/20 ring-2 ring-amber-500/30">
+                <div className="flex size-14 items-center justify-center rounded-xl bg-amber-500/20 border-2 border-amber-500/30">
                   <IconBook className="size-7 text-amber-400" />
                 </div>
                 <div>
@@ -164,10 +164,10 @@ export default function Page() {
             </CardHeader>
             <CardContent>
               <Button asChild variant="outline" className="w-full border-amber-500/40 hover:bg-amber-500/20 hover:border-amber-500/60 transition-all">
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <Link href="/docs">
                   <IconBook className="mr-2 size-5" />
                   View Docs
-                </a>
+                </Link>
               </Button>
             </CardContent>
           </Card>

@@ -5,6 +5,9 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { IconTrophy, IconMedal, IconCoin } from "@tabler/icons-react"
+import { prisma } from "@/lib/prisma"
+
+export const revalidate = 60 // Revalidate every 60 seconds for real-time updates
 
 export default async function CoinsLeaderboardPage() {
   const session = await getServerSession(authOptions)
@@ -12,18 +15,25 @@ export default async function CoinsLeaderboardPage() {
     redirect("/login")
   }
 
-  const topUsers = [
-    { rank: 1, username: "CoinMaster", coins: 15750, avatar: "👑" },
-    { rank: 2, username: "ServerKing", coins: 12340, avatar: "🎮" },
-    { rank: 3, username: "ProGamer99", coins: 10500, avatar: "⚡" },
-    { rank: 4, username: "TechWizard", coins: 8920, avatar: "🔮" },
-    { rank: 5, username: "MinecraftPro", coins: 7650, avatar: "⛏️" },
-    { rank: 6, username: "BuilderMax", coins: 6430, avatar: "🏗️" },
-    { rank: 7, username: "RedstoneKing", coins: 5890, avatar: "⚙️" },
-    { rank: 8, username: "PvPMaster", coins: 5120, avatar: "⚔️" },
-    { rank: 9, username: "CreativePro", coins: 4670, avatar: "🎨" },
-    { rank: 10, username: "SurvivalExpert", coins: 4250, avatar: "🌲" },
-  ]
+  // Fetch real top users from database
+  const users = await prisma.user.findMany({
+    orderBy: { coins: "desc" },
+    take: 10,
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      image: true,
+      coins: true,
+    }
+  })
+
+  const topUsers = users.map((user, index) => ({
+    rank: index + 1,
+    username: user.name || user.email?.split('@')[0] || 'Anonymous',
+    coins: user.coins || 0,
+    avatar: user.image || null,
+  }))
 
   return (
     <DashboardLayout>
@@ -58,17 +68,21 @@ export default async function CoinsLeaderboardPage() {
                     >
                       <div className="flex items-center gap-4">
                         <div
-                          className={`flex size-12 items-center justify-center rounded-full font-bold ${
+                          className={`flex size-12 items-center justify-center rounded-full font-bold overflow-hidden ${
                             user.rank === 1
-                              ? "bg-gradient-to-br from-amber-400 to-amber-600 text-white"
+                              ? "bg-gradient-to-br from-amber-400 to-amber-600 text-white ring-2 ring-amber-400"
                               : user.rank === 2
-                              ? "bg-gradient-to-br from-gray-300 to-gray-500 text-white"
+                              ? "bg-gradient-to-br from-gray-300 to-gray-500 text-white ring-2 ring-gray-400"
                               : user.rank === 3
-                              ? "bg-gradient-to-br from-orange-400 to-orange-600 text-white"
+                              ? "bg-gradient-to-br from-orange-400 to-orange-600 text-white ring-2 ring-orange-400"
                               : "bg-muted text-foreground"
                           }`}
                         >
-                          {user.rank <= 3 ? user.avatar : `#${user.rank}`}
+                          {user.avatar ? (
+                            <img src={user.avatar} alt={user.username} className="w-full h-full object-cover" />
+                          ) : (
+                            <span className="text-lg">{user.username.substring(0, 2).toUpperCase()}</span>
+                          )}
                         </div>
                         <div>
                           <p className="font-semibold">{user.username}</p>
