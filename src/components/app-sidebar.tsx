@@ -157,6 +157,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     email: session?.user?.email || data.user.email,
     avatar: session?.user?.image || data.user.avatar,
   }
+  
+  // Check if user is admin
+  const isAdmin = session?.user?.role === "admin"
+  
   return (
     <Sidebar collapsible="offcanvas" className="bg-sidebar border-r border-sidebar-border flex flex-col h-full" {...props}>
       <SidebarHeader className="border-b border-sidebar-border bg-smoky-gradient py-4 px-3 flex-shrink-0">
@@ -201,10 +205,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <h2 className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-green-400">Leaderboard</h2>
           <NavMain items={data.navLeaderboard} />
         </div>
-        <div className="py-1.5 space-y-1 border-t border-sidebar-border/50 mt-3">
-          <h2 className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-red-400">Admin</h2>
-          <NavMain items={data.navAdmin} />
-        </div>
+        {isAdmin && (
+          <div className="py-1.5 space-y-1 border-t border-sidebar-border/50 mt-3">
+            <h2 className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-red-400">Admin</h2>
+            <NavMain items={data.navAdmin} />
+          </div>
+        )}
       </SidebarContent>
       <SidebarFooter className="border-t border-sidebar-border/50 p-3 mt-auto flex-shrink-0 bg-sidebar/50 backdrop-blur-sm">
         <NavUser user={realUser} />
