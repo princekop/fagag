@@ -18,6 +18,7 @@ import {
   IconDatabase,
   IconUsers,
   IconServerCog,
+  IconSettings,
 } from "@tabler/icons-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -97,6 +98,11 @@ const data = {
     },
   ],
   navAdmin: [
+    {
+      title: "Settings",
+      url: "/admin/settings",
+      icon: IconSettings,
+    },
     {
       title: "Ptero Nests",
       url: "/admin/ptero/nests",

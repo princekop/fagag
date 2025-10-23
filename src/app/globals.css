@@ -433,15 +433,7 @@
     transform: translateX(0);
   }
   
-  /* Overlay for mobile sidebar */
-  [data-mobile="true"][data-state="open"]::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 40;
-  }
+  /* NO OVERLAY OR BLUR on mobile sidebar */
 }
 
 /* Mobile Navigation Improvements */
@@ -556,6 +548,23 @@
     min-width: 0 !important;
     height: 100vh !important;
     overflow: hidden !important;
+  }
+}
+
+/* FIX MOBILE SIDEBAR BLUR - NO BACKDROP FILTER ON MOBILE */
+@media (max-width: 768px) {
+  [data-slot="sheet-overlay"],
+  [data-slot="sheet-portal"],
+  [data-radix-dialog-overlay] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: transparent !important;
+    pointer-events: none !important;
+  }
+  
+  [data-slot="sheet-content"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 }
 

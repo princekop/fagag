@@ -6,11 +6,17 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Paths that require authentication
-  const protectedPaths = ["/dashboard"]
+  const protectedPaths = ["/dashboard", "/servers", "/create", "/panel", "/shop", "/earn", "/leaderboard"]
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p))
 
+  // Admin-only paths
+  const adminPaths = ["/admin", "/api/admin"]
+  const isAdminPath = adminPaths.some((p) => pathname.startsWith(p))
+
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+
+  // Check authentication for protected paths
   if (isProtected) {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
     if (!token) {
       const url = new URL("/login", request.url)
       url.searchParams.set("callbackUrl", pathname)
@@ -18,9 +24,22 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // Check admin role for admin paths
+  if (isAdminPath) {
+    if (!token) {
+      const url = new URL("/login", request.url)
+      url.searchParams.set("callbackUrl", pathname)
+      return NextResponse.redirect(url)
+    }
+    
+    if (token.role !== "admin") {
+      // Non-admin trying to access admin area - redirect to dashboard
+      return NextResponse.redirect(new URL("/dashboard", request.url))
+    }
+  }
+
   // If user is logged in and hits /login, redirect to dashboard
   if (pathname === "/login") {
-    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
     if (token) {
       return NextResponse.redirect(new URL("/dashboard", request.url))
     }
@@ -30,5 +49,16 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/dashboard/:path*"],
+  matcher: [
+    "/login", 
+    "/dashboard/:path*", 
+    "/servers/:path*", 
+    "/create/:path*", 
+    "/panel/:path*",
+    "/shop/:path*",
+    "/earn/:path*",
+    "/leaderboard/:path*",
+    "/admin/:path*",
+    "/api/admin/:path*"
+  ],
 }

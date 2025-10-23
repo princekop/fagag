@@ -262,3 +262,13 @@ model LeaderboardEntry {
   @@unique([type, userId])
   @@index([type, score])
 }
+
+model Settings {
+  id                  String   @id @default(cuid())
+  defaultRam          Int      @default(4)
+  defaultCpu          Int      @default(100)
+  defaultDisk         Int      @default(10)
+  defaultServerSlots  Int      @default(1)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}

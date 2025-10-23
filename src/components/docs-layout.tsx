@@ -59,7 +59,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
         {sidebarOpen && (
           <>
             <div 
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-transparent lg:hidden"
               onClick={() => setSidebarOpen(false)}
             />
             <div className="fixed left-0 top-14 z-50 h-[calc(100vh-3.5rem)] lg:hidden">
