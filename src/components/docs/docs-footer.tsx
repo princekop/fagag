@@ -36,13 +36,13 @@ export function DocsFooter() {
             <div className="flex items-center gap-2">
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
                 <img 
-                  src="https://i.postimg.cc/CKdJdbfB/19b2c766c17a246f80df6be88559acd5.png" 
-                  alt="LustNode Logo" 
+                  src="https://i.postimg.cc/J0f7gdct/IMG-0102.png" 
+                  alt="Sjnodes Logo" 
                   className="size-8 object-contain"
                 />
               </div>
               <span className="text-2xl font-black bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-                LustNode
+                Sjnodes
               </span>
             </div>
             
@@ -74,7 +74,7 @@ export function DocsFooter() {
                 <IconBrandTwitter className="size-5" />
               </a>
               <a 
-                href="mailto:support@lustnode.com" 
+                href="mailto:support@sjnodes.com" 
                 className="flex size-10 items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-all"
               >
                 <IconMail className="size-5" />
@@ -149,7 +149,7 @@ export function DocsFooter() {
         <div className="mt-12 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © {currentYear} LustNode. All rights reserved. Built with{" "}
+              © {currentYear} Sjnodes. All rights reserved. Built with{" "}
               <IconHeart className="inline size-4 text-red-500 fill-red-500" />{" "}
               for gamers.
             </p>

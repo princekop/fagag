@@ -38,7 +38,7 @@ export default function DashboardShowcase() {
       <section className="py-20 border-b border-white/10">
         <div className="container mx-auto px-4 lg:px-6">
           <h2 className="text-4xl font-black text-center mb-12">
-            <span className="text-white">LustNode vs </span>
+            <span className="text-white">Sjnodes vs </span>
             <span className="text-gray-600">Others</span>
           </h2>
 
@@ -49,7 +49,7 @@ export default function DashboardShowcase() {
                 <div className="size-12 rounded-full bg-primary/20 flex items-center justify-center">
                   <IconCheck className="size-6 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold text-white">LustNode Dashboard</h3>
+                <h3 className="text-2xl font-bold text-white">Sjnodes Dashboard</h3>
               </div>
 
               <ul className="space-y-4">

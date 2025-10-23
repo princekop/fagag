@@ -16,7 +16,7 @@ export default function CoinsDocsPage() {
           Coins System
         </h1>
         <p className="text-xl text-gray-400 max-w-2xl">
-          Learn how to earn, spend, and manage coins on LustNode to enhance your server hosting experience.
+          Learn how to earn, spend, and manage coins on Sjnodes to enhance your server hosting experience.
         </p>
       </div>
 
@@ -25,7 +25,7 @@ export default function CoinsDocsPage() {
         <h2 className="text-3xl font-bold text-white">What are Coins?</h2>
         <Card className="border-white/10 bg-white/5 p-6">
           <p className="text-gray-300 leading-relaxed">
-            Coins are the virtual currency used on LustNode. You can earn coins for free through various activities or purchase them to instantly upgrade your servers. Coins allow you to unlock premium features, increase server resources, and get more server slots.
+            Coins are the virtual currency used on Sjnodes. You can earn coins for free through various activities or purchase them to instantly upgrade your servers. Coins allow you to unlock premium features, increase server resources, and get more server slots.
           </p>
         </Card>
       </div>

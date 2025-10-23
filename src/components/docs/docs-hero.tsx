@@ -65,7 +65,7 @@ export function DocsHero() {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-            LustNode Platform
+            Sjnodes Platform
           </span>
         </motion.h1>
 

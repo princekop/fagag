@@ -5,7 +5,7 @@ export default function SimplePage() {
     <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-          LustNode Documentation
+          Sjnodes Documentation
         </h1>
         <p className="text-xl text-gray-400 mb-8">
           This is a simplified test page to verify routing works.

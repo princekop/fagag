@@ -182,7 +182,7 @@ export async function POST(request: Request) {
           const uniqueSuffix = user.id.slice(0, 8)
           const username = `${baseUsername}_${uniqueSuffix}` || `user_${user.id.slice(0,8)}`
           const firstName = user.name?.split(" ")[0] || user.email.split("@")[0] || "User"
-          const lastName = user.name?.split(" ").slice(1).join(" ") || "LustNode"
+          const lastName = user.name?.split(" ").slice(1).join(" ") || "Sjnodes"
           const password = genStrongPassword()
           console.log(`[SERVER CREATE] Attempting to create panel user: ${username}`)
           const created = await createApplicationUser({ email: user.email, username, password, first_name: firstName, last_name: lastName })

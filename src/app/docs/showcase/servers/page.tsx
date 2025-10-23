@@ -240,7 +240,7 @@ export default function ServersShowcase() {
       <section className="py-16 border-t border-white/5">
         <div className="container mx-auto px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Deploy Your Server?</h2>
-          <p className="text-gray-500 mb-8">Join thousands of game server hosts using LustNode</p>
+          <p className="text-gray-500 mb-8">Join thousands of game server hosts using Sjnodes</p>
           <div className="flex items-center justify-center gap-4">
             <a href="/dashboard">
               <button className="px-8 py-3 bg-white text-black rounded-lg font-semibold hover:bg-gray-100 transition-all">

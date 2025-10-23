@@ -16,7 +16,7 @@ export default function CreatingServersPage() {
           Creating Your First Server
         </h1>
         <p className="text-xl text-gray-400 max-w-2xl">
-          Step-by-step guide to deploying your game server on LustNode in minutes.
+          Step-by-step guide to deploying your game server on Sjnodes in minutes.
         </p>
       </div>
 

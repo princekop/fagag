@@ -158,7 +158,7 @@ export default function Page() {
                 </div>
                 <div>
                   <CardTitle className="text-xl font-bold">Documentation</CardTitle>
-                  <CardDescription className="text-sm">Learn how to use LustNode</CardDescription>
+                  <CardDescription className="text-sm">Learn how to use Sjnodes</CardDescription>
                 </div>
               </div>
             </CardHeader>
