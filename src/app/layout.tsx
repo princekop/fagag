@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "https://i.postimg.cc/CKdJdbfB/19b2c766c17a246f80df6be88559acd5.png", type: "image/png" },
+      { url: "https://i.postimg.cc/J0f7gdct/IMG-0102.png", type: "image/png" },
     ],
   },
   robots: {

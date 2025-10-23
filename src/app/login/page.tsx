@@ -10,7 +10,7 @@ export default function LoginPage() {
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="flex size-9 items-center justify-center rounded-2xl overflow-hidden">
               <img 
-                src="https://i.postimg.cc/CKdJdbfB/19b2c766c17a246f80df6be88559acd5.png" 
+                src="https://i.postimg.cc/J0f7gdct/IMG-0102.png" 
                 alt="Sjnodes Logo" 
                 className="size-9 object-contain"
               />
