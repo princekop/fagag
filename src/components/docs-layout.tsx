@@ -29,7 +29,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
               />
             </div>
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-              LustNode
+              Sjnodes
             </span>
           </Link>
           <nav className="ml-auto flex items-center gap-6">

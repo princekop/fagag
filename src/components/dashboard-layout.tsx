@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "@/components/site-header"
+import { Footer } from "@/components/footer"
 import {
   SidebarInset,
   SidebarProvider,
@@ -22,8 +23,11 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       <SidebarInset className="flex flex-col h-screen overflow-hidden">
         <SiteHeader />
         <div className="flex-1 overflow-y-auto overflow-x-hidden bg-smoky-dark">
-          <div className="w-full">
-            {children}
+          <div className="w-full min-h-full flex flex-col">
+            <div className="flex-1">
+              {children}
+            </div>
+            <Footer />
           </div>
         </div>
       </SidebarInset>

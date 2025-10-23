@@ -171,12 +171,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="flex size-10 items-center justify-center rounded-lg overflow-hidden bg-primary/20 ring-2 ring-primary/30 p-1 flex-shrink-0">
                   <img 
                     src="https://i.postimg.cc/CKdJdbfB/19b2c766c17a246f80df6be88559acd5.png" 
-                    alt="LustNode Logo" 
+                    alt="Sjnodes Logo" 
                     className="size-full object-contain"
                   />
                 </div>
                 <div className="flex flex-col group-data-[collapsible=icon]:hidden min-w-0 flex-1">
-                  <span className="text-lg font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">LustNode</span>
+                  <span className="text-lg font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">Sjnodes</span>
                   <span className="text-xs text-muted-foreground/80 font-medium">Free Hosting</span>
                 </div>
               </a>

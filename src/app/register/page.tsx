@@ -11,11 +11,11 @@ export default function RegisterPage() {
             <div className="flex size-9 items-center justify-center rounded-2xl overflow-hidden">
               <img 
                 src="https://i.postimg.cc/CKdJdbfB/19b2c766c17a246f80df6be88559acd5.png" 
-                alt="LustNode Logo" 
+                alt="Sjnodes Logo" 
                 className="size-9 object-contain"
               />
             </div>
-            <span className="text-lg tracking-tight">LustNode Dashboard</span>
+            <span className="text-lg tracking-tight">Sjnodes Dashboard</span>
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -32,7 +32,7 @@ export default function RegisterPage() {
       </div>
       <div className="relative hidden overflow-hidden lg:block">
         <iframe
-          title="LustNode dashboard"
+          title="Sjnodes dashboard"
           src="https://www.youtube.com/embed/CiQJSR4mYJ4?autoplay=1&mute=1&loop=1&controls=0&rel=0&modestbranding=1&playlist=CiQJSR4mYJ4&vq=hd2160"
           allow="autoplay; fullscreen; picture-in-picture"
           loading="lazy"
