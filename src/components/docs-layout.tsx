@@ -23,7 +23,7 @@ export function DocsLayout({ children }: { children: ReactNode }) {
           <Link href="/docs" className="flex items-center gap-2 font-bold text-lg">
             <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 p-1">
               <img 
-                src="https://i.postimg.cc/J0f7gdct/IMG-0102.png" 
+                src="https://i.postimg.cc/tCyDLdDB/IMG-0100.png" 
                 alt="Sjnodes Logo" 
                 className="size-full object-contain"
               />

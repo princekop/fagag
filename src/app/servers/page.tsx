@@ -23,6 +23,10 @@ type ServerItem = {
   ram: number
   disk: number
   pteroIdentifier?: string
+  allocation?: {
+    ip: string
+    port: number
+  }
 }
 
 function ServersPageContent() {
@@ -253,10 +257,16 @@ function ServersPageContent() {
                         <Badge
                           variant="outline"
                           className={
-                            s.status === "online"
+                            s.status === "online" || s.status === "running"
                               ? "bg-green-500/10 text-green-600"
                               : s.status === "starting"
                               ? "bg-blue-500/10 text-blue-600"
+                              : s.status === "installing"
+                              ? "bg-yellow-500/10 text-yellow-600"
+                              : s.status === "suspended"
+                              ? "bg-red-500/10 text-red-600"
+                              : s.status === "offline" || s.status === "stopped"
+                              ? "bg-gray-500/10 text-gray-600"
                               : "bg-gray-500/10 text-gray-600"
                           }
                         >
@@ -270,6 +280,24 @@ function ServersPageContent() {
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {s.allocation && (
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Server IP</span>
+                      <div className="flex items-center gap-1">
+                        <code className="text-xs font-mono bg-muted px-2 py-1 rounded">
+                          {s.allocation.ip}:{s.allocation.port}
+                        </code>
+                        <Button 
+                          size="sm" 
+                          variant="ghost" 
+                          className="h-6 w-6 p-0"
+                          onClick={() => copyToClipboard(`${s.allocation?.ip}:${s.allocation?.port}`)}
+                        >
+                          <IconCopy className="size-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">Players</span>
                     <span className="font-medium">{s.currentPlayers ?? 0} / {s.maxPlayers ?? 20}</span>

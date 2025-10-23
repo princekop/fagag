@@ -174,7 +174,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <a href="/dashboard" className="flex items-center gap-3 w-full">
                 <div className="flex size-10 items-center justify-center rounded-lg overflow-hidden bg-primary/20 ring-2 ring-primary/30 p-1 flex-shrink-0">
                   <img 
-                    src="https://i.postimg.cc/J0f7gdct/IMG-0102.png" 
+                    src="https://i.postimg.cc/tCyDLdDB/IMG-0100.png" 
                     alt="Sjnodes Logo" 
                     className="size-full object-contain"
                   />

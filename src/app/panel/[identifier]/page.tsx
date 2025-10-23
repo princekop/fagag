@@ -377,8 +377,32 @@ export default function PanelPage() {
     }
   }
 
+  const autoAcceptEula = async () => {
+    try {
+      const res = await fetch(`/api/panel/${identifier}/files/write`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          path: "/eula.txt",
+          content: "eula=true"
+        }),
+      })
+      if (res.ok) {
+        setSystemMessages(prev => [...prev, `[System] Auto-accepted EULA`])
+      }
+    } catch (e) {
+      console.error("Failed to auto-accept EULA", e)
+    }
+  }
+
   const sendPowerAction = async (signal: string) => {
     setSystemMessages(prev => [...prev, `[System] Sending power action: ${signal}`])
+    
+    // Auto-accept EULA when starting server
+    if (signal === "start") {
+      await autoAcceptEula()
+    }
+    
     try {
       const res = await fetch(`/api/panel/${identifier}/power`, {
         method: "POST",
