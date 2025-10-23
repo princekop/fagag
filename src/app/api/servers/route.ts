@@ -327,6 +327,14 @@ export async function POST(request: Request) {
             if (!startupOverride && attr.startup) startupOverride = attr.startup as string
           }
           const env = await buildEnvForEgg(match?.pteroId || Number(pteroEggId) || Number(process.env.PTERO_EGG_ID || 0), memoryMB, version, software)
+          // Ensure required fields have values
+          if (!dockerImageOverride) {
+            return NextResponse.json({ error: "Docker image not configured for this server type" }, { status: 400 })
+          }
+          if (!startupOverride) {
+            return NextResponse.json({ error: "Startup command not configured for this server type" }, { status: 400 })
+          }
+          
           const p = await createServer({
             name,
             externalId: server.id,
