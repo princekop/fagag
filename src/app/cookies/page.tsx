@@ -2,8 +2,8 @@ import Link from "next/link"
 
 export default function CookiesPage() {
   return (
-    <div className="min-h-screen bg-background overflow-y-auto">
-      <div className="container max-w-4xl mx-auto px-4 py-12">
+    <div className="fixed inset-0 bg-background overflow-y-auto">
+      <div className="container max-w-4xl mx-auto px-4 py-12 pb-20">
         <div className="mb-8">
           <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-4">
             ← Back to Home
